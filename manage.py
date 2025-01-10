@@ -1,6 +1,7 @@
 import os
 import sys
 
+
 if __name__ == '__main__':
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'project.settings')
     try:
@@ -12,3 +13,5 @@ if __name__ == '__main__':
             'forget to activate a virtual environment?'
         ) from exc
     execute_from_command_line(sys.argv)
+
+
