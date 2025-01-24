@@ -7,9 +7,9 @@ def get_schoolkid(kid_name):
         schoolkid = Schoolkid.objects.get(full_name__contains=kid_name)
         return schoolkid
     except Schoolkid.DoesNotExist:
-        return None
+        return
     except Schoolkid.MultipleObjectsReturned:
-        return "Найдено больше одного имени"
+        raise Schoolkid.MultipleObjectsReturned('Найдено несколько учеников, уточните ФИО')
 
 
 def remove_chastisements(schoolkid):
