@@ -60,8 +60,9 @@ def create_commendation(kid_name, subject):
         lesson = Lesson.objects.filter(group_letter=schoolkid.group_letter, year_of_study=schoolkid.year_of_study, subject__title=subject).order_by("date").first()
         Commendation.objects.create(text=random.choice(commendations), created=lesson.date, schoolkid=schoolkid, subject=lesson.subject,
                             teacher=lesson.teacher)
-    except:
-        print("ошибка")
+    except Exception as error:
+        print("Произошла ошибка:", error)
+
 
 
 
