@@ -57,16 +57,9 @@ def create_commendation(kid_name, subject):
     ]
     try:
         schoolkid = get_schoolkid(kid_name)
-        if not schoolkid:
-            print("Ученик не найден")
-            return None
-        elif schoolkid == "Найдено больше одного имени":
-            print("Найдено больше одного ученика")
-            return None
-        lessons = Lesson.objects.filter(group_letter="А", year_of_study=6, subject__title=subject)
-        commendation = Commendation.objects.filter(schoolkid=schoolkid)
-        commendation.create(text=random.choice(commendations), created=lessons[0].date, schoolkid=schoolkid, subject=lessons[0].subject,
-                            teacher=lessons[0].teacher)
+        lesson = Lesson.objects.filter(group_letter=schoolkid.group_letter, year_of_study=schoolkid.year_of_study, subject__title=subject).order_by("date").first()
+        Commendation.objects.create(text=random.choice(commendations), created=lesson.date, schoolkid=schoolkid, subject=lesson.subject,
+                            teacher=lesson.teacher)
     except:
         print("ошибка")
 
