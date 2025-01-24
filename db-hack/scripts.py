@@ -19,7 +19,8 @@ def remove_chastisements(schoolkid):
 
 def fix_marks(schoolkid):
     marks = Mark.objects.filter(schoolkid=schoolkid, points__in=[2, 3])
-    for mark in marks: mark.points = 5; mark.save()
+    marks.update(points=5)
+
 
 
 def create_commendation(kid_name, subject):
